@@ -4,51 +4,56 @@ import { motion } from "framer-motion";
 export default function ContactInfo({ isInView }) {
   return (
     <motion.div
-      className="bg-[#3D2B20] rounded-2xl shadow-2xl overflow-hidden border border-[#4a3728] mt-12"
+      // UPDATED: Navy Blue background (#001F3F) and Gold border
+      className="bg-[#001F3F] rounded-2xl shadow-2xl overflow-hidden border border-[#D4AF37]/30 mt-12"
       initial={{ opacity: 0, y: 100 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.7, type: "spring", stiffness: 100 }}
     >
       <div className="p-8">
-        <h3 className="text-3xl font-playfair-display text-[#B5843E] mb-6 border-b-2 border-[#8C5F3A] pb-3 drop-shadow">
+        {/* UPDATED: Gold Heading (#D4AF37) */}
+        <h3 className="text-3xl font-playfair-display text-[#D4AF37] mb-6 border-b-2 border-[#D4AF37]/40 pb-3 drop-shadow">
           Contact Information
         </h3>
-        {/*
-          The grid-cols-2 class ensures that the grid has two columns on
-          all screen sizes by default. On medium screens, the grid will change
-          to 4 columns with md:grid-cols-4, as before.
-        */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 font-poppins text-[#D4C4A7]">
+
+        {/* UPDATED: Text color to White for readability */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 font-poppins text-white/90">
+          {/* Phone Section */}
           <div className="flex flex-col items-center text-center space-y-2">
-            <Phone className="w-8 h-8 text-[#B5843E] flex-shrink-0" />
-            <h4 className="font-semibold text-[#F0EAD6]">Phone</h4>
-            <p>+61 468301261</p>
-            <p>+91 7093126396</p>
+            <Phone className="w-8 h-8 text-[#D4AF37] flex-shrink-0" />
+            <h4 className="font-semibold text-[#D4AF37]">Phone</h4>
+            <div className="text-sm">
+              <p>+61 468301261</p>
+              <p>+91 7093126396</p>
+            </div>
           </div>
+
+          {/* WhatsApp Section - Kept green icon for brand recognition, but used gold text */}
           <div className="flex flex-col items-center text-center space-y-2">
             <MessageCircle className="w-8 h-8 text-[#25D366] flex-shrink-0" />
-            <h4 className="font-semibold text-[#F0EAD6]">WhatsApp</h4>
-            <p>+61 468301261</p>
-            <p>+91 7093126396</p>
+            <h4 className="font-semibold text-[#D4AF37]">WhatsApp</h4>
+            <div className="text-sm">
+              <p>+61 468301261</p>
+              <p>+91 7093126396</p>
+            </div>
           </div>
-          {/*
-            Use a grid column span of 2 (col-span-2) to make the email and address
-            fields take up the full width of the two columns on mobile, forcing
-            them to stack one after the other. This effect will be undone by the
-            md:col-span-1 class which will reset them back to a single column for
-            the md screens and up.
-          */}
+
+          {/* Email Section */}
           <div className="flex flex-col items-center text-center space-y-2 col-span-2 md:col-span-1">
-            <Mail className="w-8 h-8 text-[#B5843E] flex-shrink-0" />
-            <h4 className="font-semibold text-[#F0EAD6]">Email</h4>
-            <p>beansinfo@georgesexports.com</p>
+            <Mail className="w-8 h-8 text-[#D4AF37] flex-shrink-0" />
+            <h4 className="font-semibold text-[#D4AF37]">Email</h4>
+            <p className="text-sm">beansinfo@georgesexports.com</p>
           </div>
+
+          {/* Address Section */}
           <div className="flex flex-col items-center text-center space-y-2 col-span-2 md:col-span-1">
-            <MapPin className="w-8 h-8 text-[#B5843E] flex-shrink-0" />
-            <h4 className="font-semibold text-[#F0EAD6]">Address</h4>
-            <p>Silver Spring Residency,</p>
-            <p>HMT Colony Rd, Alwal, Secunderabad,</p>
-            <p>Telangana 500010, India</p>
+            <MapPin className="w-8 h-8 text-[#D4AF37] flex-shrink-0" />
+            <h4 className="font-semibold text-[#D4AF37]">Address</h4>
+            <div className="text-sm leading-relaxed">
+              <p>Silver Spring Residency,</p>
+              <p>HMT Colony Rd, Alwal, Secunderabad,</p>
+              <p>Telangana 500010, India</p>
+            </div>
           </div>
         </div>
       </div>
