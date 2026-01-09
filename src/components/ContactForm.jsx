@@ -1,5 +1,3 @@
-// src/components/ContactForm.jsx
-
 import { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import { motion } from 'framer-motion';
@@ -83,19 +81,20 @@ export default function ContactForm({ isInView }) {
     }
   };
 
+  // UPDATED: Styling for Inputs (White background, Gold focus)
   const inputClass = (field) =>
-    `w-full px-4 py-3 border-2 rounded-xl bg-[#2C1D14] text-[#F0EAD6] transition duration-300 focus:outline-none focus:ring-2 focus:ring-[#B5843E] hover:border-[#B5843E] ${
-      errors[field] ? 'border-red-500' : 'border-[#4a3728]'
+    `w-full px-4 py-3 border-2 rounded-xl bg-white text-[#001F3F] transition duration-300 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] hover:border-[#D4AF37] ${
+      errors[field] ? 'border-red-500' : 'border-gray-200'
     }`;
 
   const getStatusMessage = () => {
     switch (submissionStatus) {
       case "sending":
-        return <p className="text-center text-[#B5843E] font-medium">Sending message...</p>;
+        return <p className="text-center text-[#D4AF37] font-medium">Sending message...</p>;
       case "success":
-        return <p className="text-center text-green-500 font-medium">Message sent successfully! We'll be in touch soon.</p>;
+        return <p className="text-center text-green-500 font-medium">Message sent successfully!</p>;
       case "error":
-        return <p className="text-center text-red-500 font-medium">Something went wrong. Please try again later.</p>;
+        return <p className="text-center text-red-500 font-medium">Something went wrong. Please try again.</p>;
       default:
         return null;
     }
@@ -103,50 +102,60 @@ export default function ContactForm({ isInView }) {
 
   return (
     <motion.div
-      className="bg-[#3D2B20] rounded-2xl shadow-2xl overflow-hidden border border-[#4a3728] max-w-2xl w-full"
+      // UPDATED: Navy Blue background
+      className="bg-[#001F3F] rounded-2xl shadow-2xl overflow-hidden border border-[#D4AF37]/30 max-w-2xl w-full"
       initial={{ opacity: 0, x: -100 }}
       animate={isInView ? { opacity: 1, x: 0 } : {}}
       transition={{ duration: 0.7, type: "spring", stiffness: 100 }}
     >
       <div className="p-8">
-        <h3 className="text-3xl font-playfair-display text-[#B5843E] mb-6 border-b-2 border-[#8C5F3A] pb-3 drop-shadow">
+        {/* UPDATED: Gold Heading and Border */}
+        <h3 className="text-3xl font-playfair-display text-[#D4AF37] mb-6 border-b-2 border-[#D4AF37]/50 pb-3 drop-shadow">
           Send a Message
         </h3>
         <form className="space-y-6 font-poppins" onSubmit={handleSubmit} noValidate ref={form}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label htmlFor="firstName" className="block text-sm font-medium text-[#D4C4A7] mb-2">First Name</label>
+              <label htmlFor="firstName" className="block text-sm font-medium text-white mb-2">First Name</label>
               <input type="text" id="firstName" name="from_first_name" value={formData.firstName} onChange={handleChange} onBlur={() => validateForm({ ...formData, firstName: formData.firstName })} className={inputClass('firstName')} />
-              {errors.firstName && <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>}
+              {errors.firstName && <p className="text-red-400 text-sm mt-1">{errors.firstName}</p>}
             </div>
             <div>
-              <label htmlFor="lastName" className="block text-sm font-medium text-[#D4C4A7] mb-2">Last Name</label>
+              <label htmlFor="lastName" className="block text-sm font-medium text-white mb-2">Last Name</label>
               <input type="text" id="lastName" name="from_last_name" value={formData.lastName} onChange={handleChange} onBlur={() => validateForm({ ...formData, lastName: formData.lastName })} className={inputClass('lastName')} />
-              {errors.lastName && <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>}
+              {errors.lastName && <p className="text-red-400 text-sm mt-1">{errors.lastName}</p>}
             </div>
           </div>
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-[#D4C4A7] mb-2">Email</label>
+            <label htmlFor="email" className="block text-sm font-medium text-white mb-2">Email</label>
             <input type="email" id="email" name="from_email" value={formData.email} onChange={handleChange} onBlur={() => validateForm({ ...formData, email: formData.email })} className={inputClass('email')} />
-            {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+            {errors.email && <p className="text-red-400 text-sm mt-1">{errors.email}</p>}
           </div>
           <div>
-            <label htmlFor="phone" className="block text-sm font-medium text-[#D4C4A7] mb-2">Phone Number</label>
+            <label htmlFor="phone" className="block text-sm font-medium text-white mb-2">Phone Number</label>
             <input type="tel" id="phone" name="from_phone" value={formData.phone} onChange={handleChange} onBlur={() => validateForm({ ...formData, phone: formData.phone })} className={inputClass('phone')} />
-            {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
+            {errors.phone && <p className="text-red-400 text-sm mt-1">{errors.phone}</p>}
           </div>
           <div>
-            <label htmlFor="country" className="block text-sm font-medium text-[#D4C4A7] mb-2">Country</label>
+            <label htmlFor="country" className="block text-sm font-medium text-white mb-2">Country</label>
             <input type="text" id="country" name="from_country" value={formData.country} onChange={handleChange} onBlur={() => validateForm({ ...formData, country: formData.country })} className={inputClass('country')} />
-            {errors.country && <p className="text-red-500 text-sm mt-1">{errors.country}</p>}
+            {errors.country && <p className="text-red-400 text-sm mt-1">{errors.country}</p>}
           </div>
           <div>
-            <label htmlFor="message" className="block text-sm font-medium text-[#D4C4A7] mb-2">Message</label>
+            <label htmlFor="message" className="block text-sm font-medium text-white mb-2">Message</label>
             <textarea id="message" rows={4} name="message" value={formData.message} onChange={handleChange} onBlur={() => validateForm({ ...formData, message: formData.message })} className={inputClass('message')}></textarea>
-            {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
+            {errors.message && <p className="text-red-400 text-sm mt-1">{errors.message}</p>}
           </div>
           {getStatusMessage()}
-          <motion.button type="submit" className="w-full bg-[#B5843E] text-white py-3 rounded-full font-poppins font-semibold hover:bg-[#D19B53] transition-colors duration-300 shadow-lg disabled:opacity-50" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} disabled={submissionStatus === 'sending'}>
+          
+          {/* UPDATED: Gold Button with Navy text */}
+          <motion.button 
+            type="submit" 
+            className="w-full bg-[#D4AF37] text-[#001F3F] py-3 rounded-full font-poppins font-bold hover:bg-[#F5D76E] transition-colors duration-300 shadow-lg disabled:opacity-50" 
+            whileHover={{ scale: 1.02 }} 
+            whileTap={{ scale: 0.98 }} 
+            disabled={submissionStatus === 'sending'}
+          >
             Send Message
           </motion.button>
         </form>
