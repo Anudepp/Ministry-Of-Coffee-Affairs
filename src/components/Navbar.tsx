@@ -1,92 +1,120 @@
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll } from "framer-motion";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
   const navigate = useNavigate();
   const location = useLocation();
+  const { scrollYProgress } = useScroll();
 
-  // This function handles both navigation and scrolling
+  /* ================= SCROLL DETECTION ================= */
+  useEffect(() => {
+    const onScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  /* ================= NAV HANDLER ================= */
   const handleNavClick = (path) => {
-    // Check if the user is already on the same page
     if (location.pathname === path) {
-      // If yes, we handle the scroll to top
-      
-      // Close the mobile menu first, to ensure the overlay is removed
-      // This is crucial for the mobile fix.
       setIsMenuOpen(false);
-
-      // We use a small delay with setTimeout to give the menu animation time to complete
-      // before the scroll action is initiated. This prevents a race condition on mobile.
       setTimeout(() => {
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth",
-        });
-      }, 150); // 150ms is a good, reliable delay
-      
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, 150);
     } else {
-      // If no, navigate to the new page
       navigate(path);
-      setIsMenuOpen(false); // Close the mobile menu
+      setIsMenuOpen(false);
     }
   };
 
   return (
-    <nav className="fixed w-full bg-[#f0efec] text-[#2C1D14] shadow-md z-50 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="flex justify-between items-center h-24">
-          {/* Logo Section */}
-          <div className="flex items-center gap-2 cursor-pointer" onClick={() => handleNavClick("/")}>
-            <img
-              src="/logo.avif"
-              alt="Georges Coffee Logo"
-              className="h-20 w-auto object-contain transition-transform duration-300 hover:scale-105"
-            />
-            <span className="text-3xl md:text-5xl font-cursive drop-shadow-lg text-[#2C1D14]">
-              Georges Coffee
-            </span>
-          </div>
+    <>
+      {/* ================= SCROLL PROGRESS BAR ================= */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#FFD700] via-[#CFAE2D] to-[#0B3D2E] origin-left z-[60]"
+        style={{ scaleX: scrollYProgress }}
+      />
 
-          {/* Right Section: Desktop Menu + Mobile Hamburger */}
-          <div className="flex items-center gap-10">
-            {/* Desktop Menu */}
-            <div className="hidden md:flex items-center gap-10">
+      <nav
+        className={`fixed w-full z-50 backdrop-blur-md transition-all duration-500
+          ${
+            scrolled
+              ? "bg-[#00162E]/95 shadow-2xl"
+              : "bg-[#002147]/95 shadow-xl"
+          }
+          border-b border-[#FFD700]/20
+        `}
+      >
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex justify-between items-center h-24">
+            {/* ================= LOGO ================= */}
+            <div
+              className="flex items-center gap-3 cursor-pointer group"
+              onClick={() => handleNavClick("/")}
+            >
+              <img
+                src="/logo.avif"
+                alt="Georges Coffee Logo"
+                className="h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+              />
+              <span className="text-3xl md:text-4xl font-cursive text-[#FFD700] drop-shadow-lg tracking-wide">
+                Ministry Of Coffee Affairs
+              </span>
+            </div>
+
+            {/* ================= DESKTOP MENU ================= */}
+            <div className="hidden md:flex items-center gap-12">
               {[
                 { name: "Home", path: "/" },
                 { name: "About", path: "/about" },
                 { name: "Products", path: "/products" },
                 { name: "Contact", path: "/contact" },
-              ].map((item) => (
-                <div key={item.name} className="relative group">
+              ].map((item) => {
+                const isActive = location.pathname === item.path;
+
+                return (
                   <button
+                    key={item.name}
                     onClick={() => handleNavClick(item.path)}
-                    className={`text-xl font-poppins font-bold transition-all duration-300 relative overflow-hidden
-                      ${location.pathname === item.path ? "text-[#B5843E]" : "hover:text-[#B5843E]"}
+                    className={`relative text-lg font-semibold tracking-wide transition-all duration-300
+                      ${
+                        isActive
+                          ? "text-[#FFD700]"
+                          : "text-white hover:text-[#FFD700]"
+                      }
                     `}
                   >
                     {item.name}
-                    <span className={`absolute left-0 bottom-0 w-full h-[3px] bg-[#B5843E] transition-transform duration-300 origin-left
-                      ${location.pathname === item.path ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}
-                    `}></span>
+
+                    {/* Gold underline */}
+                    <span
+                      className={`absolute left-0 -bottom-2 h-[3px] w-full bg-gradient-to-r from-[#FFD700] to-[#0B3D2E]
+                        transition-transform duration-300 origin-left
+                        ${isActive ? "scale-x-100" : "scale-x-0 hover:scale-x-100"}
+                      `}
+                    />
                   </button>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
-            {/* Hamburger Menu Button for Mobile */}
+            {/* ================= MOBILE MENU BUTTON ================= */}
             <button
-              className="md:hidden p-2 text-[#2C1D14] hover:text-[#B5843E] transition-colors duration-300"
+              className="md:hidden text-[#FFD700] p-2"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               <AnimatePresence mode="wait">
                 <motion.div
                   key={isMenuOpen ? "x" : "menu"}
-                  initial={{ opacity: 0, rotate: isMenuOpen ? -90 : 90 }}
+                  initial={{ opacity: 0, rotate: -90 }}
                   animate={{ opacity: 1, rotate: 0 }}
-                  exit={{ opacity: 0, rotate: isMenuOpen ? 90 : -90 }}
+                  exit={{ opacity: 0, rotate: 90 }}
                   transition={{ duration: 0.3 }}
                 >
                   {isMenuOpen ? (
@@ -98,43 +126,51 @@ export default function Navbar() {
               </AnimatePresence>
             </button>
           </div>
-        </div>
 
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {isMenuOpen && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="md:hidden overflow-hidden"
-            >
-              <div className="flex flex-col items-center gap-6 py-5 bg-[#efeeeb]">
-                {[
-                  { name: "Home", path: "/" },
-                  { name: "About", path: "/about" },
-                  { name: "Products", path: "/products" },
-                  { name: "Contact", path: "/contact" },
-                ].map((item, index) => (
-                  <motion.button
-                    key={item.name}
-                    onClick={() => handleNavClick(item.path)}
-                    initial={{ y: -10, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.05 * index, duration: 0.2 }}
-                    className={`text-lg font-poppins font-bold transition-colors
-                      ${location.pathname === item.path ? "text-[#B5843E]" : "text-[#2C1D14] hover:text-[#B5843E]"}
-                    `}
-                  >
-                    {item.name}
-                  </motion.button>
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-    </nav>
+          {/* ================= MOBILE MENU ================= */}
+          <AnimatePresence>
+            {isMenuOpen && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.35, ease: "easeInOut" }}
+                className="md:hidden overflow-hidden"
+              >
+                <div className="flex flex-col items-center gap-6 py-8 bg-[#002147] border-t border-[#FFD700]/20">
+                  {[
+                    { name: "Home", path: "/" },
+                    { name: "About", path: "/about" },
+                    { name: "Products", path: "/products" },
+                    { name: "Contact", path: "/contact" },
+                  ].map((item, index) => {
+                    const isActive = location.pathname === item.path;
+
+                    return (
+                      <motion.button
+                        key={item.name}
+                        onClick={() => handleNavClick(item.path)}
+                        initial={{ y: -10, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ delay: index * 0.06 }}
+                        className={`text-xl font-semibold tracking-wide transition-colors
+                          ${
+                            isActive
+                              ? "text-[#FFD700]"
+                              : "text-white hover:text-[#FFD700]"
+                          }
+                        `}
+                      >
+                        {item.name}
+                      </motion.button>
+                    );
+                  })}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </nav>
+    </>
   );
 }
