@@ -58,7 +58,7 @@ export default function Hero() {
             className="text-center max-w-4xl"
           >
             <span className="text-[#FFD700] uppercase tracking-[0.35em] font-bold text-xs md:text-sm mb-6 block">
-              Premium Coffee Exports for Australia & Global Markets
+              Premium Coffee Distribution for Global Markets
             </span>
 
             <h1 className="text-white text-5xl md:text-7xl font-serif font-bold leading-tight drop-shadow-2xl mb-8">
@@ -105,17 +105,17 @@ export default function Hero() {
 
               <div className="space-y-6 text-[#1C2A39] text-lg leading-relaxed font-medium">
                 <p>
-                  We export{" "}
+                  We distribute {" "}
                   <strong className="text-[#0B3D2E]">
                     premium-grade green coffee beans
                   </strong>{" "}
                   sourced from India’s finest plantations and tailored for
-                  Australian and global markets.
+                  global markets.
                 </p>
 
                 <p className="border-l-4 border-[#0B3D2E] pl-6 italic">
-                  As merchant exporters, we focus on long-term partnerships
-                  built on quality assurance, competitive pricing, and export
+                  As Green bean distributors, we focus on long-term partnerships
+                  built on quality assurance, competitive pricing, and
                   integrity.
                 </p>
               </div>
@@ -127,8 +127,8 @@ export default function Hero() {
                 </h4>
                 <p className="leading-relaxed text-[#FDF6D8]">
                   To position Indian coffee as a trusted global commodity by
-                  delivering consistency, transparency, and export excellence to
-                  Australian buyers and beyond.
+                  delivering consistency, transparency, and distribution
+                  excellence to buyers and beyond.
                 </p>
               </div>
             </div>
@@ -137,7 +137,7 @@ export default function Hero() {
             <div className="grid sm:grid-cols-2 gap-6">
               {[
                 {
-                  title: "Green Coffee Exports",
+                  title: "Green Coffee ",
                   desc:
                     "Arabica & Robusta varieties prepared for global buyers.",
                   icon: "🌍"
@@ -150,7 +150,7 @@ export default function Hero() {
                 {
                   title: "Efficient Logistics",
                   desc:
-                    "On-time shipments with documentation handled end-to-end.",
+                    "On-time delivery with documentation handled end-to-end.",
                   icon: "🚢"
                 },
                 {
