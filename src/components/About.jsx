@@ -81,11 +81,11 @@ const About = () => {
               </h3>
               <div className="space-y-4 text-[#E6ECF3] leading-relaxed">
                 <p>
-                  At Ministry Of Coffee Affairs, we proudly present Georges
-                  Coffee – Farm to Globe. Certified by the Coffee Board of
-                  India, we are trusted merchant exporters specializing in
-                  sourcing the finest Arabica and Robusta green coffee beans
-                  directly from Karnataka and Kerala.
+                  At Ministry Of Coffee Affairs, we proudly source coffee beans
+                  – Farm to Globe. Certified by the Coffee Board of India, we
+                  are trusted and specializing in sourcing the finest Arabica
+                  and Robusta green coffee beans directly from Karnataka and
+                  Kerala.
                 </p>
                 <p>
                   “Farm to Globe” reflects our dedication. We work closely with
@@ -95,8 +95,8 @@ const About = () => {
                 </p>
                 <p>
                   More than a product, coffee is our passion. From farmers’
-                  hands to cups globally, Georges Coffee embodies the promise of
-                  “Farm to Globe.”
+                  hands to cups globally, Ministry Of Coffee Affairs embodies
+                  the promise of “Farm to Globe.”
                 </p>
               </div>
             </div>
