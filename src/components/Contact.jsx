@@ -9,7 +9,7 @@ export default function Contact() {
   const isInView = useInView(ref, { once: false, margin: "-100px 0px" });
 
   return (
-    <div className="bg-[#D4AF37] text-[#1c1601]">
+    <div className="bg-[#ebe5d1] text-[#1c1601]">
       <section id="contact" ref={ref} className="pt-32 pb-20 px-4 scroll-mt-32">
         <div className="max-w-6xl mx-auto">
           <motion.h2
