@@ -16,11 +16,12 @@ export default function Products() {
   return (
     <>
       {/* ================= PRODUCTS SECTION ================= */}
-      <section className="py-32 bg-[#002147] relative">
+      {/* Changed bg to cream #ebe5d1 */}
+      <section className="py-32 bg-[#ebe5d1] relative min-h-screen">
         <div className="max-w-7xl mx-auto px-6">
 
-          {/* Title */}
-          <h2 className="text-5xl md:text-6xl font-playfair-display text-center text-white mb-20">
+          {/* Title - Changed to Navy for visibility on cream */}
+          <h2 className="text-5xl md:text-6xl font-playfair-display text-center text-[#002147] mb-20">
             Our Curated Selection
             <span className="block mt-4 w-24 h-1 mx-auto bg-[#FFD700]" />
           </h2>
@@ -34,8 +35,8 @@ export default function Products() {
                 className={`px-10 py-3 mx-2 rounded-full text-lg font-medium transition-all
                   ${
                     activeTab === tab
-                      ? "bg-[#FFD700] text-[#002147] shadow-lg"
-                      : "bg-white/10 text-white hover:bg-white/20"
+                      ? "bg-[#002147] text-[#FFD700] shadow-lg" // Active: Navy bg, Yellow text
+                      : "bg-[#002147]/10 text-[#002147] hover:bg-[#002147]/20" // Inactive: Transparent navy
                   }`}
               >
                 {tab}
@@ -52,7 +53,8 @@ export default function Products() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                <h3 className="text-3xl md:text-4xl font-playfair-display text-white mb-12">
+                {/* Category Title - Navy */}
+                <h3 className="text-3xl md:text-4xl font-playfair-display text-[#002147] mb-12">
                   {category.title}
                 </h3>
 
@@ -62,7 +64,7 @@ export default function Products() {
                     <motion.div
                       key={product.id}
                       whileHover={{ y: -6 }}
-                      className="bg-white rounded-2xl shadow-xl overflow-hidden cursor-pointer transition"
+                      className="bg-[#002147] rounded-2xl shadow-xl overflow-hidden cursor-pointer transition border border-[#FFD700]/20"
                     >
                       <div className="h-56 overflow-hidden">
                         <img
@@ -73,17 +75,19 @@ export default function Products() {
                       </div>
 
                       <div className="p-6 text-center">
-                        <h4 className="text-2xl font-playfair-display text-[#002147] mb-1">
+                        {/* Title: Yellow */}
+                        <h4 className="text-2xl font-playfair-display text-[#FFD700] mb-1">
                           {product.name}
                         </h4>
-                        <p className="text-sm text-gray-600 mb-5">
+                        {/* Content: White */}
+                        <p className="text-sm text-white/80 mb-5">
                           {product.type} • {product.process}
                         </p>
 
                         <button
                           onClick={() => setSelectedProduct(product)}
-                          className="w-full py-3 rounded-full font-semibold text-white
-                          bg-gradient-to-r from-[#FFD700] to-[#E6C15A]
+                          className="w-full py-3 rounded-full font-semibold text-[#002147]
+                          bg-[#FFD700] hover:bg-[#E6C15A]
                           hover:shadow-lg transition"
                         >
                           View Product
@@ -111,11 +115,12 @@ export default function Products() {
               initial={{ scale: 0.9 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0.9 }}
-              className="bg-white max-w-2xl w-full rounded-2xl shadow-2xl p-8 relative"
+              // Modal Background: Navy Blue
+              className="bg-[#002147] max-w-2xl w-full rounded-2xl shadow-2xl p-8 relative border border-[#FFD700]/30"
             >
               <button
                 onClick={() => setSelectedProduct(null)}
-                className="absolute top-4 right-4 text-gray-500 hover:text-[#FFD700]"
+                className="absolute top-4 right-4 text-white/50 hover:text-[#FFD700]"
               >
                 ✕
               </button>
@@ -124,28 +129,30 @@ export default function Products() {
                 <img
                   src={selectedProduct.image}
                   alt={selectedProduct.name}
-                  className="rounded-xl object-cover aspect-square"
+                  className="rounded-xl object-cover aspect-square border border-[#FFD700]/20"
                 />
 
                 <div>
-                  <h3 className="text-3xl font-playfair-display text-[#002147] mb-4">
+                  {/* Modal Title: Yellow */}
+                  <h3 className="text-3xl font-playfair-display text-[#FFD700] mb-4">
                     {selectedProduct.name}
                   </h3>
 
-                  <ul className="space-y-2 text-gray-700 text-sm">
-                    <li><strong>Type:</strong> {selectedProduct.type}</li>
-                    <li><strong>Process:</strong> {selectedProduct.process}</li>
-                    <li><strong>Area:</strong> {selectedProduct.Area}</li>
-                    <li><strong>Screen Size:</strong> {selectedProduct.ScreenSize}</li>
+                  {/* Modal Details: White */}
+                  <ul className="space-y-2 text-white/90 text-sm">
+                    <li><strong className="text-[#FFD700]">Type:</strong> {selectedProduct.type}</li>
+                    <li><strong className="text-[#FFD700]">Process:</strong> {selectedProduct.process}</li>
+                    <li><strong className="text-[#FFD700]">Area:</strong> {selectedProduct.Area}</li>
+                    <li><strong className="text-[#FFD700]">Screen Size:</strong> {selectedProduct.ScreenSize}</li>
                     <li>
-                      <strong>Flavor:</strong>{" "}
+                      <strong className="text-[#FFD700]">Flavor:</strong>{" "}
                       {selectedProduct.FlavorProfile.join(", ")}
                     </li>
                   </ul>
 
                   <button
                     onClick={() => setSelectedProduct(null)}
-                    className="mt-8 w-full py-3 rounded-full bg-[#002147] text-white font-semibold hover:bg-[#001733]"
+                    className="mt-8 w-full py-3 rounded-full bg-[#FFD700] text-[#002147] font-semibold hover:bg-[#E6C15A]"
                   >
                     Close
                   </button>
