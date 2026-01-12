@@ -20,7 +20,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  /* ================= NAV HANDLER ================= */
   const handleNavClick = (path) => {
     if (location.pathname === path) {
       setIsMenuOpen(false);
@@ -37,7 +36,7 @@ export default function Navbar() {
     <>
       {/* ================= SCROLL PROGRESS BAR ================= */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#FFD700] via-[#CFAE2D] to-[#0B3D2E] origin-left z-[60]"
+        className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#FFD700] via-[#CFAE2D] to-[#ebe5d1] origin-left z-[60]"
         style={{ scaleX: scrollYProgress }}
       />
 
@@ -45,31 +44,37 @@ export default function Navbar() {
         className={`fixed w-full z-50 backdrop-blur-md transition-all duration-500
           ${
             scrolled
-              ? "bg-[#00162E]/95 shadow-2xl"
-              : "bg-[#002147]/95 shadow-xl"
+              ? "bg-[#00162E]/95 shadow-2xl py-2"
+              : "bg-[#002147]/95 shadow-xl py-4"
           }
-          border-b border-[#FFD700]/20
+          border-b border-[#FFD700]/10
         `}
       >
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex justify-between items-center h-24">
-            {/* ================= LOGO ================= */}
+          <div className="flex justify-between items-center h-20">
+            
+            {/* ================= LOGO & AUTHENTIC NAME (With Hover Scale) ================= */}
             <div
-              className="flex items-center gap-3 cursor-pointer group"
+              className="flex items-center gap-4 cursor-pointer group"
               onClick={() => handleNavClick("/")}
             >
               <img
                 src="/logo.avif"
-                alt="Georges Coffee Logo"
-                className="h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                alt="Ministry Of Coffee Affairs Logo"
+                className="h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-110"
               />
-              <span className="text-3xl md:text-4xl font-cursive text-[#FFD700] drop-shadow-lg tracking-wide">
-                Ministry Of Coffee Affairs
-              </span>
+              <div className="flex flex-col transition-transform duration-300 group-hover:translate-x-1">
+                <span className="text-xl md:text-2xl font-serif font-bold text-[#FFD700] leading-none tracking-widest uppercase drop-shadow-md">
+                  Ministry Of
+                </span>
+                <span className="text-lg md:text-xl font-serif font-medium text-white/90 leading-tight tracking-[0.2em] uppercase">
+                  Coffee Affairs
+                </span>
+              </div>
             </div>
 
-            {/* ================= DESKTOP MENU ================= */}
-            <div className="hidden md:flex items-center gap-12">
+            {/* ================= DESKTOP MENU (With Hover Underline) ================= */}
+            <div className="hidden md:flex items-center gap-10">
               {[
                 { name: "Home", path: "/" },
                 { name: "About", path: "/about" },
@@ -82,21 +87,21 @@ export default function Navbar() {
                   <button
                     key={item.name}
                     onClick={() => handleNavClick(item.path)}
-                    className={`relative text-lg font-semibold tracking-wide transition-all duration-300
+                    className={`group relative text-sm font-bold uppercase tracking-[0.15em] transition-all duration-300
                       ${
                         isActive
                           ? "text-[#FFD700]"
-                          : "text-white hover:text-[#FFD700]"
+                          : "text-white/80 hover:text-[#FFD700]"
                       }
                     `}
                   >
                     {item.name}
 
-                    {/* Gold underline */}
+                    {/* Gradient Underline Effect */}
                     <span
-                      className={`absolute left-0 -bottom-2 h-[3px] w-full bg-gradient-to-r from-[#FFD700] to-[#0B3D2E]
+                      className={`absolute left-0 -bottom-2 h-[3px] w-full bg-gradient-to-r from-[#FFD700] to-transparent
                         transition-transform duration-300 origin-left
-                        ${isActive ? "scale-x-100" : "scale-x-0 hover:scale-x-100"}
+                        ${isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}
                       `}
                     />
                   </button>
@@ -106,7 +111,7 @@ export default function Navbar() {
 
             {/* ================= MOBILE MENU BUTTON ================= */}
             <button
-              className="md:hidden text-[#FFD700] p-2"
+              className="md:hidden text-[#FFD700] p-2 hover:bg-white/5 rounded-full transition-colors"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               <AnimatePresence mode="wait">
@@ -115,13 +120,9 @@ export default function Navbar() {
                   initial={{ opacity: 0, rotate: -90 }}
                   animate={{ opacity: 1, rotate: 0 }}
                   exit={{ opacity: 0, rotate: 90 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.2 }}
                 >
-                  {isMenuOpen ? (
-                    <X className="h-7 w-7" />
-                  ) : (
-                    <Menu className="h-7 w-7" />
-                  )}
+                  {isMenuOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
                 </motion.div>
               </AnimatePresence>
             </button>
@@ -134,37 +135,23 @@ export default function Navbar() {
                 initial={{ height: 0, opacity: 0 }}
                 animate={{ height: "auto", opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.35, ease: "easeInOut" }}
-                className="md:hidden overflow-hidden"
+                className="md:hidden overflow-hidden bg-[#00162E]"
               >
-                <div className="flex flex-col items-center gap-6 py-8 bg-[#002147] border-t border-[#FFD700]/20">
+                <div className="flex flex-col items-center gap-8 py-10 border-t border-[#FFD700]/10">
                   {[
                     { name: "Home", path: "/" },
                     { name: "About", path: "/about" },
                     { name: "Products", path: "/products" },
                     { name: "Contact", path: "/contact" },
-                  ].map((item, index) => {
-                    const isActive = location.pathname === item.path;
-
-                    return (
-                      <motion.button
-                        key={item.name}
-                        onClick={() => handleNavClick(item.path)}
-                        initial={{ y: -10, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ delay: index * 0.06 }}
-                        className={`text-xl font-semibold tracking-wide transition-colors
-                          ${
-                            isActive
-                              ? "text-[#FFD700]"
-                              : "text-white hover:text-[#FFD700]"
-                          }
-                        `}
-                      >
-                        {item.name}
-                      </motion.button>
-                    );
-                  })}
+                  ].map((item) => (
+                    <button
+                      key={item.name}
+                      onClick={() => handleNavClick(item.path)}
+                      className="text-lg font-bold uppercase tracking-widest text-white active:text-[#FFD700] hover:text-[#FFD700] transition-colors"
+                    >
+                      {item.name}
+                    </button>
+                  ))}
                 </div>
               </motion.div>
             )}
