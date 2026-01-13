@@ -65,11 +65,9 @@ export default function Navbar() {
               />
               <div className="flex flex-col transition-transform duration-300 group-hover:translate-x-1">
                 <span className="text-xl md:text-2xl font-serif font-bold text-[#FFD700] leading-none tracking-widest uppercase drop-shadow-md">
-                  Ministry Of
+                  Ministry Of Coffee Affairs
                 </span>
-                <span className="text-lg md:text-xl font-serif font-medium text-white/90 leading-tight tracking-[0.2em] uppercase">
-                  Coffee Affairs
-                </span>
+
               </div>
             </div>
 
