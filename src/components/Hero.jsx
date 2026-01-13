@@ -10,78 +10,68 @@ export default function Hero() {
 
   useEffect(() => {
     const interval = setInterval(
-      () => setCurrent(prev => (prev + 1) % images.length),
-      5500
+      () => setCurrent((prev) => (prev + 1) % images.length),
+      2500 
     );
     return () => clearInterval(interval);
   }, []);
 
   return (
-    /* Changed global bg to #ebe5d1 */
-    <div className="bg-[#ebe5d1] font-sans selection:bg-[#FFD700] selection:text-[#002147]">
+    <>
       <WhatsAppButton />
-
-      {/* ================= HERO SECTION ================= */}
-      <div id="home" className="relative w-full h-[95vh] overflow-hidden">
-        <AnimatePresence mode="wait">
+      {/* HERO SECTION */}
+      <div
+        id="home"
+        className="relative w-full h-screen bg-black pt-24 overflow-hidden"
+      >
+        <AnimatePresence>
           {images.map(
             (img, index) =>
-              index === current &&
-              <motion.div
-                key={img}
-                initial={{ opacity: 0, x: 80, scale: 1.08 }}
-                animate={{ opacity: 1, x: 0, scale: 1 }}
-                exit={{ opacity: 0, x: -80 }}
-                transition={{ duration: 2.2, ease: "easeInOut" }}
-                className="absolute inset-0"
-              >
-                <img
-                  src={img}
-                  alt={`Slide ${index + 1}`}
-                  className="w-full h-full object-cover"
-                />
-
-                {/* Updated Overlay: Pure Navy Blue Gradient for consistency */}
-                <div className="absolute inset-0 bg-gradient-to-br from-[#002147]/90 via-[#002147]/60 to-transparent" />
-
-                {/* Muted Yellow Accent */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-[#FFD700]/10 via-transparent to-transparent" />
-              </motion.div>
+              index === current && ( 
+                <motion.div
+                  key={img}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 1.5 }}
+                  className={`absolute inset-0 flex items-center justify-center`}
+                >
+                  <img
+                    src={img}
+                    alt={`Slide ${index + 1}`}
+                    className="w-full h-full object-cover transition-transform duration-[6000ms] ease-linear transform-gpu"
+                    style={{
+                      transform: "scale(1.05)",
+                    }}
+                    loading="eager"
+                  />
+                </motion.div>
+              )
           )}
         </AnimatePresence>
 
-        {/* ================= HERO CONTENT ================= */}
-        <div className="absolute inset-0 z-20 flex flex-col items-center justify-center px-6">
-          <motion.div
-            initial={{ y: 40, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.6 }}
-            className="text-center max-w-4xl"
-          >
-            <h1 className="text-white text-5xl md:text-7xl font-serif font-bold leading-tight drop-shadow-2xl mb-8">
-              From Farm to <span className="text-[#f4f3f2]">Global Ports</span>
-            </h1>
-            <span className="text-white uppercase tracking-[0.35em] font-bold text-xs md:text-sm mb-6 block">
-              Premium Coffee Distribution for Global Markets
-            </span>
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black/60 pointer-events-none" />
 
-            <div className="w-32 h-[3px] bg-[#FFD700] mx-auto" />
-          </motion.div>
+        {/* Tagline Container at the top */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 p-6 text-center">
+          <p className="text-white text-3xl sm:text-4xl md:text-5xl font-dancing-script italic font-semibold drop-shadow-lg whitespace-nowrap">
+            From Farm to Globe
+          </p>
         </div>
 
-        {/* ================= PROGRESS INDICATOR ================= */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex space-x-4 z-30">
-          {images.map((_, index) =>
+        {/* Dots Indicator */}
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-3 z-30">
+          {images.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrent(index)}
-              className={`h-[3px] rounded-full transition-all duration-700 ${index ===
-              current
-                ? "w-16 bg-[#FFD700]"
-                : "w-8 bg-white/40 hover:bg-white/70"}`}
+              className={`w-3 h-3 rounded-full transition-colors duration-300 ${
+                index === current ? "bg-[#F0EAD6]" : "bg-white/50 hover:bg-white"
+              }`}
               aria-label={`Go to slide ${index + 1}`}
             />
-          )}
+          ))}
         </div>
       </div>
 
@@ -183,6 +173,6 @@ export default function Hero() {
       <div className="h-[1px] w-full bg-[#002147]/10" />
 
       <Footer />
-    </div>
+      </>
   );
 }
