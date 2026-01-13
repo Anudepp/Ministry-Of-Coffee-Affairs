@@ -56,7 +56,7 @@ export default function Hero() {
         {/* Tagline Container at the top */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 p-6 text-center">
           <p className="text-white text-3xl sm:text-4xl md:text-5xl font-dancing-script italic font-semibold drop-shadow-lg whitespace-nowrap">
-            From Farm to Globe
+            From Farm to Global Ports 
           </p>
         </div>
 
