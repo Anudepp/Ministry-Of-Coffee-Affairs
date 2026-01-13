@@ -59,13 +59,13 @@ export default function Hero() {
             className="text-center max-w-4xl"
           >
             {/* Tagline: Yellow */}
-            <span className="text-[#FFD700] uppercase tracking-[0.35em] font-bold text-xs md:text-sm mb-6 block">
+            <span className="text-white uppercase tracking-[0.35em] font-bold text-xs md:text-sm mb-6 block">
               Premium Coffee Distribution for Global Markets
             </span>
 
             {/* Heading: White with Yellow accent */}
             <h1 className="text-white text-5xl md:text-7xl font-serif font-bold leading-tight drop-shadow-2xl mb-8">
-              From Farm to <span className="text-[#FFD700]">Global Ports</span>
+              From Farm to <span className="text-[#f4f3f2]">Global Ports</span>
             </h1>
 
             <div className="w-32 h-[3px] bg-[#FFD700] mx-auto" />
