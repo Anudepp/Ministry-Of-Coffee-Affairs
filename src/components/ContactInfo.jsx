@@ -42,7 +42,7 @@ export default function ContactInfo({ isInView }) {
           <div className="flex flex-col items-center text-center space-y-2 col-span-2 md:col-span-1">
             <Mail className="w-8 h-8 text-[#D4AF37] flex-shrink-0" />
             <h4 className="font-semibold text-[#D4AF37]">Email</h4>
-            <p className="text-sm">beansinfo@georgesexports.com</p>
+            <p className="text-sm">info@ministryofcoffeeaffairs.com</p>
           </div>
 
           {/* Address Section */}
@@ -50,9 +50,9 @@ export default function ContactInfo({ isInView }) {
             <MapPin className="w-8 h-8 text-[#D4AF37] flex-shrink-0" />
             <h4 className="font-semibold text-[#D4AF37]">Address</h4>
             <div className="text-sm leading-relaxed">
-              <p>Silver Spring Residency,</p>
-              <p>HMT Colony Rd, Alwal, Secunderabad,</p>
-              <p>Telangana 500010, India</p>
+              <p>Unit 6, 50 Waroonga Rd</p>
+              <p>Waratah NSW 2298</p>
+              <p>Australia</p>
             </div>
           </div>
         </div>
