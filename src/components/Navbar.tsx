@@ -61,7 +61,7 @@ export default function Navbar() {
               <img
                 src="/logo.avif"
                 alt="Ministry Of Coffee Affairs Logo"
-                className="h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-110"
+              className="h-20 w-auto object-contain transition-transform duration-300 hover:scale-105"
               />
               <div className="flex flex-col transition-transform duration-300 group-hover:translate-x-1">
                 <span className="text-xl md:text-2xl font-serif font-bold text-[#FFD700] leading-none tracking-widest uppercase drop-shadow-md">
